@@ -6,7 +6,6 @@ import {
 import { PrismaService } from '../prisma.service';
 
 import * as bcrypt from 'bcrypt';
-
 import * as jwt from 'jsonwebtoken';
 
 import { LoginDto } from './dto/login.dto';
@@ -26,6 +25,9 @@ export class AuthService {
       await this.prisma.user.findUnique({
         where: {
           email: data.email,
+        },
+        include: {
+          organization: true,
         },
       });
 
@@ -56,20 +58,26 @@ export class AuthService {
         {
           id: user.id,
           role: user.role,
+          organizationId: user.organizationId,
         },
         process.env.JWT_SECRET!,
         {
-          expiresIn: '15m',
+          expiresIn:
+            process.env.JWT_EXPIRES_IN || '15m',
         },
       );
 
 
     return {
       accessToken: token,
+
       user: {
         id: user.id,
         name: user.name,
+        email: user.email,
         role: user.role,
+        organizationId: user.organizationId,
+        organizationName: user.organization.name,
       },
     };
   }
