@@ -1,0 +1,55 @@
+name: Deploy Chitti Frontend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: apps/web
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+
+      - run: npm install
+
+
+      - run: npm run build
+
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/out
+
+
+  deploy:
+
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+
+    steps:
+
+      - uses: actions/deploy-pages@v4
+      
