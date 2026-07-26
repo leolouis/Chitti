@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 
 import { UsersService } from './users.service';
-
 import { CreateUserDto } from './dto/create-user.dto';
 
 
@@ -15,35 +14,29 @@ import { CreateUserDto } from './dto/create-user.dto';
 export class UsersController {
 
   constructor(
-    private usersService: UsersService,
+    private readonly usersService: UsersService,
   ) {}
 
 
   @Post()
-  create(
+  async create(
     @Body() body: CreateUserDto,
   ) {
-
     return this.usersService.create(body);
-
   }
 
 
   @Get()
-  findAll() {
-
+  async findAll() {
     return this.usersService.findAll();
-
   }
 
 
   @Get(':id')
-  findOne(
+  async findOne(
     @Param('id') id: string,
   ) {
-
     return this.usersService.findById(id);
-
   }
 
 }
