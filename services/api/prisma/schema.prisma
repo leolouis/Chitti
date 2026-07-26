@@ -1,0 +1,214 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  phone     String?
+  email     String?
+  address   String?
+
+  users     User[]
+  members   Member[]
+  groups    ChitGroup[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id             String   @id @default(uuid())
+
+  name           String
+  email          String   @unique
+  phone          String?
+  passwordHash   String
+
+  role           UserRole
+
+  organizationId String
+  organization   Organization @relation(
+    fields: [organizationId],
+    references: [id]
+  )
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Member {
+  id             String   @id @default(uuid())
+
+  name           String
+  phone          String
+  email          String?
+
+  organizationId String
+  organization   Organization @relation(
+    fields: [organizationId],
+    references: [id]
+  )
+
+  memberships    ChitMembership[]
+  payments       Payment[]
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model ChitGroup {
+  id              String   @id @default(uuid())
+
+  name            String
+
+  totalAmount     Decimal
+  installmentAmount Decimal
+
+  duration        Int
+  memberCount     Int
+
+  status          ChitStatus
+
+  organizationId  String
+  organization    Organization @relation(
+    fields: [organizationId],
+    references: [id]
+  )
+
+  members         ChitMembership[]
+  installments    Installment[]
+  auctions        Auction[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ChitMembership {
+  id            String @id @default(uuid())
+
+  ticketNumber  String
+
+  memberId      String
+  member        Member @relation(
+    fields: [memberId],
+    references: [id]
+  )
+
+  chitGroupId   String
+  chitGroup     ChitGroup @relation(
+    fields: [chitGroupId],
+    references: [id]
+  )
+
+  joinedAt      DateTime @default(now())
+}
+
+model Installment {
+  id            String @id @default(uuid())
+
+  installmentNo Int
+  amount        Decimal
+
+  dueDate       DateTime
+  paidDate      DateTime?
+
+  status        PaymentStatus
+
+  chitGroupId   String
+  chitGroup     ChitGroup @relation(
+    fields: [chitGroupId],
+    references: [id]
+  )
+}
+
+model Payment {
+  id            String @id @default(uuid())
+
+  amount        Decimal
+  method        PaymentMethod
+
+  reference     String?
+
+  memberId      String
+  member        Member @relation(
+    fields: [memberId],
+    references: [id]
+  )
+
+  createdAt     DateTime @default(now())
+}
+
+model Auction {
+  id            String @id @default(uuid())
+
+  auctionDate   DateTime
+
+  winningAmount Decimal?
+
+  status        AuctionStatus
+
+  chitGroupId   String
+  chitGroup     ChitGroup @relation(
+    fields: [chitGroupId],
+    references: [id]
+  )
+
+  bids          Bid[]
+}
+
+model Bid {
+  id          String @id @default(uuid())
+
+  amount      Decimal
+
+  auctionId   String
+  auction     Auction @relation(
+    fields: [auctionId],
+    references: [id]
+  )
+
+  memberId    String
+
+  createdAt   DateTime @default(now())
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  STAFF
+  MEMBER
+}
+
+enum ChitStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  LATE
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  UPI
+  BANK_TRANSFER
+  CARD
+}
+
+enum AuctionStatus {
+  SCHEDULED
+  RUNNING
+  COMPLETED
+  CANCELLED
+}
