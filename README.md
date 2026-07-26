@@ -5,136 +5,162 @@
 </p>
 
 <p align="center">
-  A secure, scalable, modern SaaS platform for managing chit groups, members, collections, auctions, payments, and financial operations.
+  A secure, scalable SaaS platform for managing chit groups, members, collections, auctions, payments, and financial operations.
 </p>
 
 <p align="center">
-  Built with modern engineering practices for the future of community-based financial organizations.
+
+![GitHub stars](https://img.shields.io/github/stars/leolouis/Chitti?style=flat)
+![GitHub forks](https://img.shields.io/github/forks/leolouis/Chitti?style=flat)
+![GitHub issues](https://img.shields.io/github/issues/leolouis/Chitti)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/leolouis/Chitti)
+![License](https://img.shields.io/github/license/leolouis/Chitti)
+![Last Commit](https://img.shields.io/github/last-commit/leolouis/Chitti)
+
+</p>
+
+<p align="center">
+
+🚀 Active Development  
+🔒 Security Focused  
+🌎 Open Source  
+
 </p>
 
 ---
 
-# 🚀 Overview
+# Overview
 
-Chitti is a next-generation digital platform designed to modernize chit fund operations.
+Chitti is a modern financial operations platform built for chit fund organizations.
 
-Traditional chit organizations often depend on manual registers, spreadsheets, phone communication, and disconnected workflows.
+It transforms traditional manual workflows into a secure digital experience.
 
-Chitti provides a unified technology platform to manage the complete operational lifecycle:
+Organizations can manage:
 
-- Organization management
-- User management
-- Member management
-- Chit group operations
+- Members
+- Chit groups
 - Installments
 - Payments
 - Auctions
-- Financial tracking
-- Reporting infrastructure
+- Users
+- Financial operations
 
-The mission is to create a secure and scalable operating system for chit fund organizations worldwide.
-
----
-
-# 🎯 Vision
-
-Build the most trusted financial operations platform for community-driven organizations.
-
-Chitti is designed around:
-
-- Security-first engineering
-- Financial transparency
-- Operational automation
-- Scalable cloud architecture
-- Simple user experience
-- Reliable data management
+Chitti is designed as a scalable foundation for the next generation of community-based financial platforms.
 
 ---
 
-# Why Chitti?
+# Vision
 
-## The Problem
+## Building the operating system for chit fund businesses
 
-Many chit fund organizations still rely on manual processes.
+Many financial organizations still depend on:
 
-This creates challenges:
-
-- Difficult collection management
+- Paper records
+- Spreadsheets
 - Manual calculations
-- Lack of transparency
-- Limited reporting
-- Human errors
-- Difficulty scaling operations
-- Poor customer experience
+- Phone-based coordination
+- Disconnected tools
 
-## The Solution
+Chitti provides a unified technology platform that enables:
 
-Chitti introduces a modern digital infrastructure layer that enables organizations to:
-
-- Manage operations digitally
-- Track financial activity
-- Improve transparency
-- Reduce manual work
-- Scale efficiently
+- Transparency
+- Automation
+- Security
+- Operational efficiency
+- Better customer experience
 
 ---
 
-# ✨ Features
+# Project Status
 
-## 🏢 Organization Management
+🚧 Active Development
 
-A multi-tenant architecture allows multiple organizations to securely operate on the same platform.
+Current focus:
+
+- Backend API development
+- Authentication system
+- Organization management
+- Member workflows
+- Financial modules
+- Frontend dashboard
+- Cloud deployment
+
+---
+
+# Core Features
+
+## Organization Management
+
+Multi-tenant organization management.
 
 Capabilities:
 
 - Organization profiles
-- Organization-level data isolation
 - User management
-- Role-based access control
-- Secure operational workflows
+- Data isolation
+- Role-based permissions
 
-Supported roles:
+Roles:
 
-| Role | Responsibility |
+| Role | Description |
 |---|---|
-| OWNER | Complete organization control |
-| ADMIN | Administrative management |
-| STAFF | Daily operational activities |
-| MEMBER | Personal account access |
+| OWNER | Full organization control |
+| ADMIN | Administrative operations |
+| STAFF | Operational management |
+| MEMBER | Member access |
 
 ---
 
-# 👥 Member Management
+# User Authentication
+
+Secure authentication foundation.
+
+Features:
+
+- Email login
+- Password hashing
+- JWT authentication
+- Role management
+- Secure API access
+
+Security principles:
+
+- No plain-text passwords
+- Protected sensitive data
+- Environment-based secrets
+
+---
+
+# Member Management
 
 Manage the complete member lifecycle.
 
 Features:
 
 - Member registration
-- Member profiles
-- Contact information
-- Chit participation
-- Membership tracking
+- Profile management
+- Contact details
+- Group participation
 - Payment history
 
 ---
 
-# 💰 Chit Group Management
+# Chit Group Management
 
-Create and manage chit groups digitally.
+Create and manage chit groups.
 
 Features:
 
-- Create chit groups
-- Configure total amount
-- Configure installment amount
-- Define duration
-- Manage member count
-- Track group status
+- Group creation
+- Total amount configuration
+- Installment configuration
+- Duration management
+- Member allocation
+- Status tracking
 
 Lifecycle:
 
-```text
+```
 DRAFT
   |
   ↓
@@ -144,26 +170,25 @@ ACTIVE
 COMPLETED
   |
   ↓
-ARCHIVED
+CANCELLED
 ```
 
 ---
 
-# 📅 Installment Management
+# Installment Management
 
-Track scheduled financial commitments.
+Track recurring financial commitments.
 
 Features:
 
-- Installment generation
-- Due date tracking
-- Payment status
-- Paid date tracking
-- Collection history
+- Installment schedules
+- Due dates
+- Payment tracking
+- Collection status
 
 Payment states:
 
-```text
+```
 PENDING
 PAID
 LATE
@@ -172,43 +197,41 @@ CANCELLED
 
 ---
 
-# 💳 Payment Management
+# Payment Management
 
-Maintain transparent financial records.
+Maintain transparent payment records.
 
-Supported payment methods:
+Supported methods:
 
 - Cash
 - UPI
 - Bank Transfer
 - Card
 
-Payment tracking:
+Tracks:
 
 - Amount
 - Payment method
 - Reference number
 - Member relationship
 - Transaction history
-- Collection records
 
 ---
 
-# 🔨 Auction Management
+# Auction Management
 
 Digital auction workflows.
 
 Features:
 
 - Auction scheduling
-- Bid management
-- Winner tracking
+- Bid tracking
+- Winner management
 - Auction history
-- Status management
 
 Auction lifecycle:
 
-```text
+```
 SCHEDULED
       |
       ↓
@@ -220,43 +243,41 @@ COMPLETED
 
 ---
 
-# 🏗️ System Architecture
+# Architecture
 
-Chitti follows a modern monorepo architecture designed for scalability.
+Chitti follows a modern monorepo architecture.
 
-```text
+```
 Chitti
 │
 ├── apps
 │   │
 │   └── web
-│       └── Frontend application
+│       └── Frontend Application
 │
 ├── services
 │   │
 │   └── api
-│       └── NestJS backend service
+│       └── NestJS Backend API
 │
 ├── packages
-│   └── Shared libraries
+│   └── Shared Libraries
 │
 ├── infrastructure
-│   └── Deployment configuration
+│   └── Deployment Configuration
 │
 ├── docs
-│   └── Technical documentation
+│   └── Technical Documentation
 │
 └── .github
-    └── CI/CD automation
+    └── CI/CD Workflows
 ```
 
 ---
 
-# 🛠 Technology Stack
+# Technology Stack
 
 ## Backend
-
-Built with:
 
 - NestJS
 - TypeScript
@@ -264,41 +285,26 @@ Built with:
 - PostgreSQL
 - JWT Authentication
 
-Engineering principles:
-
-- Modular architecture
-- Strong typing
-- Clean separation of responsibilities
-- Secure API design
-- Maintainable services
-
----
-
 ## Frontend
-
-Planned production stack:
 
 - Next.js
 - TypeScript
 - Tailwind CSS
-- Modern component architecture
 
-Goals:
+## Development Tools
 
-- Fast user experience
-- Responsive dashboards
-- Enterprise-grade interface
-- Mobile-ready design
+- GitHub Actions
+- ESLint
+- Jest
+- Prisma Studio
 
 ---
 
-# 🗄 Database Architecture
-
-Chitti uses PostgreSQL with Prisma ORM.
+# Database Design
 
 Core entities:
 
-```text
+```
 Organization
       |
       |
@@ -315,66 +321,64 @@ Organization
               └── Auctions
 ```
 
-Database design principles:
+Design goals:
 
 - Data consistency
-- Tenant isolation
+- Organization isolation
 - Scalability
-- Future analytics capability
+- Future analytics
 
 ---
 
-# 🔐 Security Architecture
+# Security
 
-Security is a core engineering priority.
+Security is a primary design goal.
 
 Implemented:
 
 - Password hashing
-- Environment-based secrets
-- Prisma-safe database access
+- JWT authentication foundation
 - DTO validation
-- Secure API patterns
+- Secure database access
+- Environment configuration
 
 Planned:
 
-- JWT authorization guards
-- Role-based permissions
-- Audit logs
+- Role-based authorization guards
+- Audit logging
 - Rate limiting
 - Security monitoring
 - Advanced encryption
-- Compliance-ready controls
 
----
+Security policy:
 
-# 📂 Repository Structure
+See:
 
-```text
-Chitti
-
-├── apps
-│   └── web
-
-├── services
-│   └── api
-
-├── packages
-
-├── infrastructure
-
-├── docs
-
-├── .github
-
-├── README.md
-
-└── LICENSE
+```
+SECURITY.md
 ```
 
 ---
 
-# 💻 Local Development
+# Repository Structure
+
+```
+Chitti
+
+├── apps
+├── services
+├── packages
+├── infrastructure
+├── docs
+├── .github
+├── LICENSE
+├── README.md
+└── ROADMAP.md
+```
+
+---
+
+# Getting Started
 
 ## Requirements
 
@@ -382,8 +386,8 @@ Install:
 
 - Node.js 22+
 - PostgreSQL
-- npm or pnpm
 - Git
+- npm or pnpm
 
 ---
 
@@ -405,11 +409,11 @@ npm install
 
 ---
 
-# Environment Configuration
+# Environment Setup
 
-Create environment files:
+Create:
 
-```text
+```
 .env
 ```
 
@@ -435,7 +439,7 @@ Navigate:
 cd services/api
 ```
 
-Install dependencies:
+Install:
 
 ```bash
 npm install
@@ -447,13 +451,13 @@ Generate Prisma client:
 npx prisma generate
 ```
 
-Run database migrations:
+Run migrations:
 
 ```bash
 npx prisma migrate dev
 ```
 
-Open Prisma Studio:
+Open database:
 
 ```bash
 npx prisma studio
@@ -461,19 +465,21 @@ npx prisma studio
 
 ---
 
-# Run Application
-
-Development:
+# Run Development Server
 
 ```bash
 npm run dev
 ```
 
-Production:
+Build production:
 
 ```bash
 npm run build
+```
 
+Start production:
+
+```bash
 npm run start
 ```
 
@@ -481,13 +487,13 @@ npm run start
 
 # Testing
 
-Run unit tests:
+Unit tests:
 
 ```bash
 npm run test
 ```
 
-Run end-to-end tests:
+End-to-end tests:
 
 ```bash
 npm run test:e2e
@@ -495,11 +501,9 @@ npm run test:e2e
 
 ---
 
-# 🚀 Deployment Architecture
+# Deployment Architecture
 
-Production architecture:
-
-```text
+```
                  Users
 
                    |
@@ -516,10 +520,10 @@ Production architecture:
 
                    |
 
-          Cloud Infrastructure
+            Cloud Infrastructure
 ```
 
-Recommended deployment:
+Recommended platforms:
 
 ## Frontend
 
@@ -542,53 +546,53 @@ Recommended deployment:
 
 # CI/CD
 
-Chitti uses automated development workflows.
+Development workflow:
 
-Pipeline:
-
-```text
+```
 Code Commit
 
-      ↓
+     ↓
 
 Automated Checks
 
-      ↓
+     ↓
 
 Build
 
-      ↓
+     ↓
 
 Tests
 
-      ↓
+     ↓
 
 Deployment
 ```
 
 ---
 
-# 🧑‍💻 Developer Experience
+# Documentation
 
-Engineering standards:
+Documentation:
 
-- TypeScript-first development
-- Modular services
-- Clear documentation
-- Automated workflows
-- Scalable architecture
-- Production-quality practices
+```
+docs/
+
+├── architecture.md
+├── api.md
+├── database.md
+└── deployment.md
+```
 
 ---
 
-# 🗺 Roadmap
+# Roadmap
 
 ## Phase 1 — Foundation
 
 Completed:
 
-- Repository structure
-- NestJS API foundation
+- Repository setup
+- Backend architecture
 - Prisma schema
 - Authentication foundation
 - Organization module
@@ -603,7 +607,7 @@ In progress:
 - Chit group workflows
 - Installment engine
 - Payment workflows
-- Auction management
+- Auction workflows
 
 ---
 
@@ -613,22 +617,22 @@ Future:
 
 - Mobile applications
 - Advanced analytics
-- Automated notifications
+- Notifications
 - Reporting engine
-- Audit trails
+- Audit systems
 - Multi-language support
-- AI-powered financial insights
+- AI-powered insights
 
 ---
 
-# 🤝 Contributing
+# Contributing
 
 Contributions are welcome.
 
 Before contributing:
 
 1. Create a feature branch
-2. Follow coding standards
+2. Follow project standards
 3. Add tests
 4. Update documentation
 5. Submit a pull request
@@ -641,29 +645,61 @@ git checkout -b feature/new-feature
 
 ---
 
-# 📄 License
+# Community
+
+We welcome contributions from:
+
+- Developers
+- Designers
+- FinTech enthusiasts
+- Open-source contributors
+
+Ways to help:
+
+- Report issues
+- Suggest improvements
+- Improve documentation
+- Submit pull requests
+
+---
+
+# License
 
 MIT License
 
 ---
 
-# 🔒 Security
+# Repository
 
-For security issues, please refer to:
+GitHub:
 
-```text
-SECURITY.md
-```
-
-Do not publicly disclose vulnerabilities.
+https://github.com/leolouis/Chitti
 
 ---
 
-# 📌 Project Information
+# Recommended GitHub Topics
 
-Repository:
+Add these repository topics:
 
-https://github.com/leolouis/Chitti
+```
+chit-fund
+fintech
+finance
+saas
+financial-management
+payment-system
+auction-system
+nestjs
+typescript
+postgresql
+prisma
+nextjs
+react
+tailwindcss
+monorepo
+open-source
+india
+```
 
 ---
 
@@ -671,4 +707,5 @@ https://github.com/leolouis/Chitti
 
 Chitti brings modern software engineering practices to traditional financial operations.
 
-The goal is to create a secure, transparent, and scalable platform that empowers chit fund organizations worldwide.
+The goal is to create a secure, transparent, and scalable platform that empowers organizations worldwide.
+```
