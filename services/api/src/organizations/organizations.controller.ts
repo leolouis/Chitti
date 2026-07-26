@@ -15,35 +15,29 @@ import { CreateOrganizationDto } from './dto/create-organization.dto';
 export class OrganizationsController {
 
   constructor(
-    private organizationsService: OrganizationsService,
+    private readonly organizationsService: OrganizationsService,
   ) {}
 
 
   @Post()
-  create(
+  async create(
     @Body() body: CreateOrganizationDto,
   ) {
-
     return this.organizationsService.create(body);
-
   }
 
 
   @Get()
-  findAll() {
-
+  async findAll() {
     return this.organizationsService.findAll();
-
   }
 
 
   @Get(':id')
-  findOne(
+  async findOne(
     @Param('id') id: string,
   ) {
-
     return this.organizationsService.findById(id);
-
   }
 
 }
