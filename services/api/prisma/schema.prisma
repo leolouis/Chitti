@@ -17,6 +17,8 @@ model Organization {
   users     User[]
   members   Member[]
   groups    ChitGroup[]
+  ledger    LedgerEntry[]
+  audits    AuditLog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -38,12 +40,33 @@ model User {
     references: [id]
   )
 
+  refreshTokens  RefreshToken[]
+  audits         AuditLog[]
+
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
 
+model RefreshToken {
+  id        String @id @default(uuid())
+
+  userId    String
+  user      User @relation(
+    fields: [userId],
+    references: [id]
+  )
+
+  tokenHash String
+
+  expiresAt DateTime
+
+  revoked   Boolean @default(false)
+
+  createdAt DateTime @default(now())
+}
+
 model Member {
-  id             String   @id @default(uuid())
+  id             String @id @default(uuid())
 
   name           String
   phone          String
@@ -58,90 +81,110 @@ model Member {
   memberships    ChitMembership[]
   payments       Payment[]
 
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([phone])
 }
 
 model ChitGroup {
-  id              String   @id @default(uuid())
+  id                 String @id @default(uuid())
 
-  name            String
+  name               String
 
-  totalAmount     Decimal
-  installmentAmount Decimal
+  totalAmount        Decimal
+  installmentAmount  Decimal
 
-  duration        Int
-  memberCount     Int
+  duration           Int
+  memberCount        Int
 
-  status          ChitStatus
+  status             ChitStatus
 
-  organizationId  String
-  organization    Organization @relation(
+  organizationId     String
+  organization       Organization @relation(
     fields: [organizationId],
     references: [id]
   )
 
-  members         ChitMembership[]
-  installments    Installment[]
-  auctions        Auction[]
+  members            ChitMembership[]
+  installments       Installment[]
+  auctions           Auction[]
 
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model ChitMembership {
-  id            String @id @default(uuid())
+  id           String @id @default(uuid())
 
-  ticketNumber  String
+  ticketNumber String
 
-  memberId      String
-  member        Member @relation(
+  memberId     String
+  member       Member @relation(
     fields: [memberId],
     references: [id]
   )
 
-  chitGroupId   String
-  chitGroup     ChitGroup @relation(
+  chitGroupId String
+  chitGroup   ChitGroup @relation(
     fields: [chitGroupId],
     references: [id]
   )
 
-  joinedAt      DateTime @default(now())
+  joinedAt DateTime @default(now())
+
+  @@unique([
+    chitGroupId,
+    ticketNumber
+  ])
 }
 
 model Installment {
-  id            String @id @default(uuid())
+  id             String @id @default(uuid())
 
-  installmentNo Int
-  amount        Decimal
+  installmentNo  Int
+  amount         Decimal
 
-  dueDate       DateTime
-  paidDate      DateTime?
+  dueDate        DateTime
+  paidDate       DateTime?
 
-  status        PaymentStatus
+  status         PaymentStatus
 
-  chitGroupId   String
-  chitGroup     ChitGroup @relation(
+  chitGroupId    String
+  chitGroup      ChitGroup @relation(
     fields: [chitGroupId],
     references: [id]
   )
+
+  createdAt DateTime @default(now())
+
+  @@index([dueDate])
 }
 
 model Payment {
-  id            String @id @default(uuid())
+  id             String @id @default(uuid())
 
-  amount        Decimal
-  method        PaymentMethod
+  receiptNumber  String @unique
 
-  reference     String?
+  amount         Decimal
 
-  memberId      String
-  member        Member @relation(
+  method         PaymentMethod
+
+  status         PaymentStatus
+
+  reference      String?
+
+  memberId       String
+  member         Member @relation(
     fields: [memberId],
     references: [id]
   )
 
-  createdAt     DateTime @default(now())
+  verifiedBy     String?
+
+  createdAt DateTime @default(now())
+
+  @@index([memberId])
 }
 
 model Auction {
@@ -159,30 +202,87 @@ model Auction {
     references: [id]
   )
 
-  bids          Bid[]
+  bids Bid[]
+
+  createdAt DateTime @default(now())
 }
 
 model Bid {
-  id          String @id @default(uuid())
+  id        String @id @default(uuid())
 
-  amount      Decimal
+  amount    Decimal
 
-  auctionId   String
-  auction     Auction @relation(
+  auctionId String
+  auction   Auction @relation(
     fields: [auctionId],
     references: [id]
   )
 
-  memberId    String
+  memberId String
 
-  createdAt   DateTime @default(now())
+  createdAt DateTime @default(now())
 }
+
+model LedgerEntry {
+  id             String @id @default(uuid())
+
+  organizationId String
+
+  organization Organization @relation(
+    fields: [organizationId],
+    references: [id]
+  )
+
+  type LedgerType
+
+  amount Decimal
+
+  referenceType String
+
+  referenceId String
+
+  createdBy String
+
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id             String @id @default(uuid())
+
+  organizationId String
+
+  organization Organization @relation(
+    fields: [organizationId],
+    references: [id]
+  )
+
+  userId String
+
+  user User @relation(
+    fields: [userId],
+    references: [id]
+  )
+
+  action String
+
+  entity String
+
+  entityId String
+
+  oldData Json?
+
+  newData Json?
+
+  createdAt DateTime @default(now())
+}
+
 
 enum UserRole {
   OWNER
   ADMIN
   STAFF
   MEMBER
+  AUDITOR
 }
 
 enum ChitStatus {
@@ -211,4 +311,9 @@ enum AuctionStatus {
   RUNNING
   COMPLETED
   CANCELLED
+}
+
+enum LedgerType {
+  CREDIT
+  DEBIT
 }
