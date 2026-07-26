@@ -1,0 +1,17 @@
+{
+  "name": "chitti",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modern Chit Fund Management Platform",
+  "license": "MIT",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm --parallel dev",
+    "build": "pnpm --recursive build",
+    "test": "pnpm --recursive test",
+    "lint": "pnpm --recursive lint"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
